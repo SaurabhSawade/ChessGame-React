@@ -217,9 +217,11 @@ export default function App() {
   })
   const [status, setStatus] = useState('')
   const [gameOver, setGameOver] = useState(false)
-  const [whiteTime, setWhiteTime] = useState(600) // 10 minutes in seconds
-  const [blackTime, setBlackTime] = useState(600)
-  const timerRef = useRef()
+  const [whiteTime, setWhiteTime] = useState(600); // 10 minutes in seconds
+  const [blackTime, setBlackTime] = useState(600);
+  const timerRef = useRef();
+
+  const [hoveredMoves, setHoveredMoves] = useState([]);
 
 
   //timer logic
@@ -470,13 +472,24 @@ export default function App() {
         <div>Black: {formatTime(blackTime)}</div>
         <button onClick={resetGame} className="bg-gray-700 px-4 py-1 rounded hover:bg-gray-600">Reset</button>
       </div>
-      <Board
+      {/* <Board
         board={board}
         selected={selected}
         onSquareClick={handleSquareClick}
         promotion={promotion}
         onPromote={handlePromotion}
-      />
+      /> */}
+      <Board
+          board={board}
+          selected={selected}
+          onSquareClick={handleSquareClick}
+          promotion={promotion}
+          onPromote={handlePromotion}
+          hoveredMoves={hoveredMoves}
+          setHoveredMoves={setHoveredMoves}
+          turn={turn}
+          canMove={canMove}
+       />
       {promotion && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-60 z-50">
           <div className="bg-white p-4 rounded shadow flex gap-4">
